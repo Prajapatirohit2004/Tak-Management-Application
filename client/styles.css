@@ -1,0 +1,188 @@
+/* styles.css – Premium Dark‑Mode UI */
+
+:root {
+  /* Color palette – dark background with vibrant accent */
+  --bg-primary: hsl(220, 15%, 10%);
+  --bg-card: hsla(220, 15%, 20%, 0.8);
+  --accent: hsl(200, 80%, 55%);
+  --accent-light: hsl(200, 80%, 70%);
+  --text-primary: hsl(0, 0%, 95%);
+  --text-muted: hsl(0, 0%, 65%);
+  --radius: 0.8rem;
+  --transition: 0.2s ease-out;
+}
+
+/* Global reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+  font-family: 'Inter', system-ui, sans-serif;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Container */
+.container {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+h1 {
+  font-size: 2rem;
+  color: var(--accent);
+}
+
+/* Buttons */
+.btn {
+  cursor: pointer;
+  padding: 0.6rem 1.2rem;
+  border: none;
+  border-radius: var(--radius);
+  font-weight: 600;
+  transition: var(--transition);
+  background: var(--accent);
+  color: #fff;
+}
+
+.btn.primary {
+  background: var(--accent);
+}
+
+.btn.primary:hover {
+  background: var(--accent-light);
+}
+
+.btn.secondary {
+  background: transparent;
+  border: 2px solid var(--accent);
+  color: var(--accent);
+}
+
+.btn.secondary:hover {
+  background: var(--accent);
+  color: #fff;
+}
+
+.hidden {display: none;}
+
+/* Modal – glassmorphism */
+.modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(4px);
+  z-index: 1000;
+}
+
+.modal-content {
+  background: var(--bg-card);
+  padding: 2rem;
+  border-radius: var(--radius);
+  width: 90%;
+  max-width: 400px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.6);
+  backdrop-filter: blur(12px);
+  animation: slideDown 0.3s ease-out;
+}
+
+@keyframes slideDown {
+  from { transform: translateY(-20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+input {
+  width: 100%;
+  padding: 0.6rem;
+  margin-bottom: 1rem;
+  border: 1px solid var(--text-muted);
+  border-radius: var(--radius);
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  transition: var(--transition);
+}
+
+input:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 2px hsla(200,80%,55%,0.2);
+}
+
+/* Task grid */
+.tasks-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 1rem;
+}
+
+.task-card {
+  background: var(--bg-card);
+  border-radius: var(--radius);
+  padding: 1rem;
+  position: relative;
+  overflow: hidden;
+  backdrop-filter: blur(4px);
+  transition: var(--transition);
+}
+
+.task-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 16px rgba(0,0,0,0.4);
+}
+
+.task-card h3 {
+  margin-bottom: 0.5rem;
+  color: var(--accent);
+}
+
+.task-card p {
+  margin-bottom: 0.8rem;
+  color: var(--text-muted);
+}
+
+.task-card .actions {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  display: flex;
+  gap: 0.3rem;
+}
+
+.task-card .actions button {
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: var(--transition);
+}
+
+.task-card .actions button:hover {
+  color: var(--accent);
+}
+
+/* Responsive tweaks */
+@media (max-width: 600px) {
+  header h1 {font-size: 1.5rem;}
+  .new-task {flex-direction: column;}
+  .new-task input, .new-task button {width: 100%; margin-bottom: 0.5rem;}
+}
